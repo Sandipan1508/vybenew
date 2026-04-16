@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - VybeCulture Orders</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+        }
+        .admin-header {
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-header h1 {
+            font-family: 'Playfair Display', serif;
+        }
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 5px;
+        }
+        .tab-btn.active {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #1a1a1a;
+        }
+        .stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .orders-table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f9f9f9;
+            font-weight: 600;
+        }
+        .status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-confirmed {
+            background: #cce5ff;
+            color: #004085;
+        }
+        .status-shipped {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-delivered {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #1a1a1a;
+            background: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        .action-btn:hover {
+            background: #1a1a1a;
+            color: white;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        .refresh-btn {
+            background: #c9a87c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+<style>
+        .login-required {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+        }
+        .login-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .login-box h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 0.8rem;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .error-msg {
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginSection" class="login-required" style="display:none;">
+        <div class="login-box">
+            <h2>Admin Login</h2>
+            <p style="color:#666;margin-bottom:1rem;">Enter admin credentials</p>
+            <div class="error-msg" id="adminError"></div>
+            <input type="text" id="adminUser" placeholder="Username">
+            <input type="password" id="adminPass" placeholder="Password">
+            <button onclick="adminLogin()">Login</button>
+            <p style="margin-top:1rem;font-size:0.9rem;"><a href="index.html" style="color:#666;">← Back to Website</a></p>
+        </div>
+    </div>
+    
+    <div id="adminContent" style="display:none;">
+        <div class="admin-header">
+            <h1>VybeCulture Admin</h1>
+            <button class="refresh-btn" onclick="adminLogout()">Logout</button>
+        </div>
+        
+        <div class="admin-container">
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showTab('orders')">Orders</button>
+                <button class="tab-btn" onclick="showTab('messages')">Messages</button>
+            </div>
+            
+            <div id="ordersTab">
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3 id="total-orders">0</h3>
+                        <p>Total Orders</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="pending-orders">0</h3>
+                        <p>Pending</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="shipped-orders">0</h3>
+                        <p>Shipped</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="revenue">₹0</h3>
+                        <p>Revenue</p>
+                    </div>
+                </div>
+        
+        <div class="orders-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-body">
+                </tbody>
+            </table>
+        </div>
+        </div>
+        
+        <div id="messagesTab" style="display:none;">
+            <div class="orders-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messages-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check admin login
+        const adminAuth = localStorage.getItem('adminAuth');
+        
+        if (!adminAuth) {
+            document.getElementById('loginSection').style.display = 'flex';
+            document.getElementById('adminContent').style.display = 'none';
+        } else {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
+            loadOrders();
+        }
+        
+        function adminLogin() {
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+            
+            // Admin credentials - CHANGE THESE
+            const adminUsername = 'vybe';
+            const adminPassword = 'vybe@2026';
+            
+            if (user === adminUsername && pass === adminPassword) {
+                localStorage.setItem('adminAuth', 'true');
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+                loadOrders();
+            } else {
+                document.getElementById('adminError').textContent = 'Invalid credentials';
+                document.getElementById('adminError').style.display = 'block';
+            }
+        }
+        
+        function adminLogout() {
+            localStorage.removeItem('adminAuth');
+            window.location.reload();
+        }
+        
+        function showTab(tabName) {
+            if (event) {
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+            
+            if (tabName === 'orders') {
+                document.getElementById('ordersTab').style.display = 'block';
+                document.getElementById('messagesTab').style.display = 'none';
+                loadOrders();
+            } else {
+                document.getElementById('ordersTab').style.display = 'none';
+                document.getElementById('messagesTab').style.display = 'block';
+                loadMessages();
+            }
+        }
+        
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            const tbody = document.getElementById('messages-body');
+            
+            if (messages.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No messages yet</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = messages.map(msg => `
+                <tr>
+                    <td>${msg.name}</td>
+                    <td>${msg.email}</td>
+                    <td>${msg.phone || '-'}</td>
+                    <td>${msg.message.substring(0,50)}${msg.message.length > 50 ? '...' : ''}</td>
+                    <td>${msg.date}</td>
+                </tr>
+            `).join('');
+        }
+        
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            
+            document.getElementById('total-orders').textContent = orders.length;
+            
+            const pending = orders.filter(o => o.status === 'Pending').length;
+            const shipped = orders.filter(o => o.status === 'Shipped' || o.status === 'Delivered').length;
+            const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+            
+            document.getElementById('pending-orders').textContent = pending;
+            document.getElementById('shipped-orders').textContent = shipped;
+            document.getElementById('revenue').textContent = '₹' + totalRevenue.toLocaleString();
+            
+            const tbody = document.getElementById('orders-body');
+            
+            if (orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No orders yet</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = orders.map(order => {
+                const statusClass = 'status-' + order.status.toLowerCase();
+                return `
+                    <tr>
+                        <td><strong>${order.orderId}</strong></td>
+                        <td>${order.date}</td>
+                        <td>${order.userName || 'Guest'}</td>
+                        <td>${order.userPhone || '-'}</td>
+                        <td>${order.items.length} items</td>
+                        <td>₹${order.total.toLocaleString()}</td>
+                        <td><span class="status ${statusClass}">${order.status}</span></td>
+                        <td>
+                            <button class="action-btn" onclick="viewOrder('${order.orderId}')">View</button>
+                            <button class="action-btn" onclick="updateStatus('${order.orderId}', 'Confirmed')">Confirm</button>
+                            <button class="action-btn" onclick="updateStatus('${order.orderId}', 'Shipped')">Ship</button>
+                            <button class="action-btn" onclick="updateStatus('${order.orderId}', 'Delivered')">Delivered</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function viewOrder(orderId) {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const order = orders.find(o => o.orderId === orderId);
+            if (!order) return;
+            
+            let details = `Order: ${order.orderId}\nDate: ${order.date}\nStatus: ${order.status}\n\nItems:\n`;
+            order.items.forEach(item => {
+                details += `- ${item.name} x${item.quantity} = ₹${item.price * item.quantity}\n`;
+            });
+            details += `\nTotal: ₹${order.total}`;
+            
+            alert(details);
+        }
+        
+        function updateStatus(orderId, newStatus) {
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const index = orders.findIndex(o => o.orderId === orderId);
+            if (index !== -1) {
+                orders[index].status = newStatus;
+                localStorage.setItem('orders', JSON.stringify(orders));
+                loadOrders();
+                alert(`Order ${orderId} marked as ${newStatus}`);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VybeCulture - Premium Fashion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                    <img src="logo.png" alt="VybeCulture" style="height:40px; vertical-align:middle;">
+                    <span style="margin-left:10px;">VybeCulture</span>
+                </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="search-btn" onclick="toggleSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="user-btn" id="userBtn" onclick="handleUserClick()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Style</h1>
+            <p>Discover premium fashion that defines your unique personality</p>
+            <a href="products.html" class="btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <img src="men-black.png" alt="Men's Collection">
+                <div class="category-overlay">
+                    <h3>Men's Collection</h3>
+                    <a href="products.html?category=men">Explore</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="women-black.png" alt="Women's Collection">
+                <div class="category-overlay">
+                    <h3>Women's Collection</h3>
+                    <a href="products.html?category=women">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured">
+        <h2>Men's Collection</h2>
+        <div class="product-grid" id="men-products">
+        </div>
+        <div class="view-all">
+            <a href="products.html?category=men" class="btn-secondary">View All Men's</a>
+        </div>
+    </section>
+
+    <section class="featured">
+        <h2>Women's Collection</h2>
+        <div class="product-grid" id="women-products">
+        </div>
+        <div class="view-all">
+            <a href="products.html?category=women" class="btn-secondary">View All Women's</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-box">
+            <i class="fas fa-shipping-fast"></i>
+            <h3>Free Shipping</h3>
+            <p>On orders over ₹999</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-undo"></i>
+            <h3>Easy Returns</h3>
+            <p>30-day return policy</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-headset"></i>
+            <h3>24/7 Support</h3>
+            <p>Dedicated customer care</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Secure Payment</h3>
+            <p>100% secure transactions</p>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Stay Connected</h2>
+        <p>Subscribe for exclusive offers and new arrivals</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email">
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>VybeCulture</h3>
+                <p>Premium fashion for the modern individual.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/vybeculture_society" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/vybeculture/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/vybe_culture" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> vybeculture2026@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +91 7982504396</p>
+                <p><i class="fas fa-map-marker-alt"></i> Delhi, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 VybeCulture. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <div class="search-modal" id="searchModal">
+        <div class="search-box">
+            <button class="close-search" onclick="toggleSearch()">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts(event)">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

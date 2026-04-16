@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - VybeCulture</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .verify-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+    </style>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #fafafa; }
+        
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+        
+        .auth-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+        
+        .auth-box h1 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .auth-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .auth-form input {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 5px;
+        }
+        
+        .auth-form input:focus {
+            outline: none;
+            border-color: #1a1a1a;
+        }
+        
+        .auth-form button {
+            padding: 1rem;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .auth-form button:hover {
+            background: #333;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+        }
+        
+        .auth-switch a {
+            color: #1a1a1a;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #666;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                    <img src="logo.png" alt="VybeCulture" style="height:40px; vertical-align:middle;">
+                    <span style="margin-left:10px;">VybeCulture</span>
+                </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="auth-container">
+        <div class="auth-box">
+            <h1>Create Account</h1>
+            <p>Join VybeCulture</p>
+            
+            <div class="error-msg" id="signupError"></div>
+            
+            <form class="auth-form" onsubmit="handleSignup(event)">
+                <input type="text" id="signupName" placeholder="Full Name" required>
+                <input type="email" id="signupEmail" placeholder="Email Address" required>
+                <input type="tel" id="signupPhone" placeholder="Phone Number (10 digits)" pattern="[0-9]{10}" required>
+                <div class="otp-section" id="otpSection" style="display:none;">
+                    <input type="text" id="otpInput" placeholder="Enter OTP sent to your phone" maxlength="4">
+                    <button type="button" onclick="verifyOTP()" class="verify-btn">Verify OTP</button>
+                    <p id="otpTimer" style="text-align:center;color:#666;font-size:0.9rem;"></p>
+                </div>
+                <input type="password" id="signupPassword" placeholder="Password" required>
+                <input type="text" id="signupAddress" placeholder="Delivery Address">
+                <button type="submit" id="signupBtn">Send OTP</button>
+            </form>
+            
+            <div class="auth-switch">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+            
+            <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <div class="search-modal" id="searchModal">
+        <div class="search-box">
+            <button class="close-search" onclick="toggleSearch()">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts(event)">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+    <script>
+        let generatedOTP = null;
+        let userData = null;
+        
+        // Check if already logged in
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+            window.location.href = 'index.html';
+        }
+        
+        function handleSignup(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const phone = document.getElementById('signupPhone').value;
+            const password = document.getElementById('signupPassword').value;
+            const address = document.getElementById('signupAddress').value;
+            
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Check if email already exists
+            if (users.find(u => u.email === email)) {
+                document.getElementById('signupError').textContent = 'Email already registered';
+                document.getElementById('signupError').style.display = 'block';
+                return;
+            }
+            
+            // Store data temporarily
+            userData = { name, email, phone, password, address };
+            
+            // Generate and send OTP
+            generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+            
+            // Send OTP via WhatsApp (simulation - in real use API)
+            const adminPhone = '917982504396';
+            const otpMsg = `*VybeCulture - OTP Verification*%0A%0AYour verification code is: *${generatedOTP}%0A%0APlease enter this code to complete registration.`;
+            window.open(`https://wa.me/${adminPhone}?text=${encodeURIComponent(otpMsg.replace('*', '').replace('*', ''))}`, '_blank');
+            
+            // Show OTP field
+            document.getElementById('otpSection').style.display = 'block';
+            document.getElementById('signupBtn').textContent = 'Verify OTP';
+            document.getElementById('signupError').textContent = `OTP sent to ${phone}. Check WhatsApp!`;
+            document.getElementById('signupError').style.display = 'block';
+            
+            // Start timer
+            let countdown = 60;
+            const timer = setInterval(() => {
+                countdown--;
+                document.getElementById('otpTimer').textContent = `Resend OTP in ${countdown} seconds`;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('otpTimer').textContent = '';
+                }
+            }, 1000);
+            
+            // Store OTP in session
+            sessionStorage.setItem('signupOTP', generatedOTP);
+            sessionStorage.setItem('signupData', JSON.stringify(userData));
+        }
+        
+        function verifyOTP() {
+            const enteredOTP = document.getElementById('otpInput').value;
+            const storedOTP = sessionStorage.getItem('signupOTP');
+            const storedData = JSON.parse(sessionStorage.getItem('signupData'));
+            
+            if (enteredOTP === storedOTP) {
+                // Save user to database
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                const newUser = {
+                    id: Date.now(),
+                    name: storedData.name,
+                    email: storedData.email,
+                    phone: storedData.phone,
+                    password: storedData.password,
+                    address: storedData.address,
+                    verified: true,
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Auto login
+                localStorage.setItem('currentUser', JSON.stringify(newUser));
+                
+                // Clear session
+                sessionStorage.removeItem('signupOTP');
+                sessionStorage.removeItem('signupData');
+                
+                alert('Account verified successfully!');
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('signupError').textContent = 'Invalid OTP. Please try again.';
+                document.getElementById('signupError').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

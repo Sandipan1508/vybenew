@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - VybeCulture</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+        }
+        header {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        .back-btn {
+            padding: 0.5rem 1.5rem;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .track-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        .track-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .track-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .search-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .search-box input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .search-box button {
+            width: 100%;
+            padding: 1rem;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        .order-result {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+            display: none;
+        }
+        .order-result.show { display: block; }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .order-id { font-weight: 600; font-size: 1.2rem; }
+        .status-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #cce5ff; color: #004085; }
+        .status-shipped { background: #d4edda; color: #155724; }
+        .status-delivered { background: #d1ecf1; color: #0c5460; }
+        .timeline {
+            margin-top: 2rem;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            height: calc(100% - 20px);
+            width: 2px;
+            background: #eee;
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            flex-shrink: 0;
+        }
+        .timeline-icon.active {
+            background: #1a1a1a;
+            color: white;
+        }
+        .timeline-content h4 { margin-bottom: 0.3rem; }
+        .timeline-content p { color: #666; font-size: 0.85rem; }
+        .order-items {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        .order-items h4 { margin-bottom: 1rem; }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #1a1a1a;
+        }
+        .not-found {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">VybeCulture</div>
+        <a href="index.html" class="back-btn">Back to Home</a>
+    </header>
+    
+    <div class="track-container">
+        <div class="track-header">
+            <h1>Track Your Order</h1>
+            <p>Enter your order ID to track your order status</p>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" id="orderInput" placeholder="Enter Order ID (e.g., VYB-12345678)">
+            <button onclick="trackOrder()">Track Order</button>
+        </div>
+        
+        <div class="order-result" id="orderResult">
+        </div>
+    </div>
+
+    <script>
+        function trackOrder() {
+            const orderId = document.getElementById('orderInput').value.trim().toUpperCase();
+            const result = document.getElementById('orderResult');
+            
+            if (!orderId) {
+                alert('Please enter order ID');
+                return;
+            }
+            
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const order = orders.find(o => o.orderId === orderId);
+            
+            if (!order) {
+                result.innerHTML = '<div class="not-found">Order not found. Please check your order ID.</div>';
+                result.classList.add('show');
+                return;
+            }
+            
+            const statusClass = 'status-' + order.status.toLowerCase();
+            const steps = ['Pending', 'Confirmed', 'Shipped', 'Delivered'];
+            const currentIndex = steps.indexOf(order.status);
+            
+            let timeline = steps.map((step, index) => {
+                const isActive = index <= currentIndex;
+                const isPast = index < currentIndex;
+                const icon = isPast ? '✓' : (isActive ? '●' : '○');
+                const activeClass = isActive ? 'active' : '';
+                return `
+                    <div class="timeline-item">
+                        <div class="timeline-icon ${activeClass}">${icon}</div>
+                        <div class="timeline-content">
+                            <h4>${step}</h4>
+                            <p>${getStepDesc(step)}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            let items = order.items.map(item => `
+                <div class="order-item">
+                    <span>${item.name} x${item.quantity} (Size: ${item.size})</span>
+                    <span>₹${item.price * item.quantity}</span>
+                </div>
+            `).join('');
+            
+            result.innerHTML = `
+                <div class="order-header">
+                    <span class="order-id">${order.orderId}</span>
+                    <span class="status-badge ${statusClass}">${order.status}</span>
+                </div>
+                <p style="color: #666; margin-bottom: 1rem;">Ordered on: ${order.date}</p>
+                <div class="timeline">${timeline}</div>
+                <div class="order-items">
+                    <h4>Order Items</h4>
+                    ${items}
+                    <div class="order-total">
+                        <span>Total</span>
+                        <span>₹${order.total.toLocaleString()}</span>
+                    </div>
+                </div>
+            `;
+            result.classList.add('show');
+        }
+        
+        function getStepDesc(step) {
+            const desc = {
+                'Pending': 'Order placed, waiting for confirmation',
+                'Confirmed': 'Order confirmed, preparing for shipment',
+                'Shipped': 'Order dispatched, in transit',
+                'Delivered': 'Order delivered successfully'
+            };
+            return desc[step] || '';
+        }
+    </script>
+</body>
+</html>
