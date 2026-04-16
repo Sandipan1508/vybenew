@@ -3,20 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VybeCulture - Premium Fashion</title>
+    <title>VybeCulture - Premium Oversize T-Shirts & Fashion</title>
+    <meta name="description" content="VybeCulture - Premium oversize t-shirts and fashion wear. Shop men's and women's collection at best prices in Delhi, India. Free shipping on orders above ₹999.">
+    <meta name="keywords" content="oversize t-shirts, mens wear, womens wear, fashion, premium clothing, Delhi, India">
+    <meta name="author" content="VybeCulture">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="VybeCulture - Premium Oversize Fashion">
+    <meta property="og:description" content="Shop premium oversize t-shirts and fashion wear">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vybeculture.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="logo.png">
+    
+    <!-- Structured Data for Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ClothingStore",
+        "name": "VybeCulture",
+        "description": "Premium oversize fashion wear",
+        "url": "https://vybeculture.com",
+        "logo": "https://vybeculture.com/logo.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+917982504396",
+            "contactType": "Customer Service"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Delhi",
+            "addressCountry": "IN"
+        },
+        "sameAs": [
+            "https://instagram.com/vybeculture_society",
+            "https://twitter.com/vybe_culture",
+            "https://www.linkedin.com/company/vybeculture/"
+        ]
+    }
+    </script>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                    <img src="logo.png" alt="VybeCulture" style="height:40px; vertical-align:middle;">
-                    <span style="margin-left:10px;">VybeCulture</span>
-                </div>
+                <img src="logo.png" alt="VybeCulture" style="height:35px;">
+                <span>VybeCulture</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="products.html">Shop</a></li>
@@ -24,16 +68,9 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <button class="search-btn" onclick="toggleSearch()">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="user-btn" id="userBtn" onclick="handleUserClick()">
-                    <i class="fas fa-user"></i>
-                </button>
-                <button class="cart-btn" onclick="toggleCart()">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">0</span>
-                </button>
+                <button onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                <button id="userBtn" onclick="handleUserClick()"><i class="fas fa-user"></i></button>
+                <button onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></button>
             </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -84,6 +121,15 @@
         </div>
         <div class="view-all">
             <a href="products.html?category=women" class="btn-secondary">View All Women's</a>
+        </div>
+    </section>
+
+    <section class="featured">
+        <h2>Fidget Collection</h2>
+        <div class="product-grid" id="fidget-products">
+        </div>
+        <div class="view-all">
+            <a href="products.html?category=fidget" class="btn-secondary">View All Fidget</a>
         </div>
     </section>
 
@@ -142,10 +188,10 @@
             <div class="footer-section">
                 <h3>Customer Care</h3>
                 <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Shipping Policy</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping.html">Shipping Policy</a></li>
+                    <li><a href="returns.html">Returns</a></li>
+                    <li><a href="sizeguide.html">Size Guide</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -172,7 +218,7 @@
                 <span>Total:</span>
                 <span id="cart-total">₹0</span>
             </div>
-            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+            <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
         </div>
     </div>
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>

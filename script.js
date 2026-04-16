@@ -6,7 +6,11 @@ const products = [
     { id: 5, name: "Oversize Black Jacket", price: 649, originalPrice: 1299, image: "men-black.png", category: "men", sizes: ["S", "M", "L", "XL", "XXL"] },
     { id: 6, name: "Oversize Black Gown", price: 649, originalPrice: 1299, image: "women-black.png", category: "women", sizes: ["S", "M", "L", "XL", "XXL"] },
     { id: 7, name: "Oversize White Shirt", price: 649, originalPrice: 1299, image: "men-white.png", category: "men", sizes: ["S", "M", "L", "XL", "XXL"] },
-    { id: 8, name: "Oversize White Dress", price: 649, originalPrice: 1299, image: "women-white.png", category: "women", sizes: ["S", "M", "L", "XL", "XXL"] }
+    { id: 8, name: "Oversize White Dress", price: 649, originalPrice: 1299, image: "women-white.png", category: "women", sizes: ["S", "M", "L", "XL", "XXL"] },
+    { id: 9, name: "Fidget Spinner Black", price: 199, originalPrice: 399, image: "men-black.png", category: "fidget", sizes: ["One Size"] },
+    { id: 10, name: "Fidget Spinner White", price: 199, originalPrice: 399, image: "men-white.png", category: "fidget", sizes: ["One Size"] },
+    { id: 11, name: "Fidget Toy Black", price: 249, originalPrice: 499, image: "women-black.png", category: "fidget", sizes: ["One Size"] },
+    { id: 12, name: "Fidget Toy White", price: 249, originalPrice: 499, image: "women-white.png", category: "fidget", sizes: ["One Size"] }
 ];
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -25,11 +29,18 @@ function renderWomenProducts() {
     container.innerHTML = womenProducts.map(product => createProductCard(product)).join('');
 }
 
+function renderFidgetProducts() {
+    const container = document.getElementById('fidget-products');
+    if (!container) return;
+    const fidgetProducts = products.filter(p => p.category === 'fidget').slice(0, 4);
+    container.innerHTML = fidgetProducts.map(product => createProductCard(product)).join('');
+}
+
 function createProductCard(product) {
     return `
         <div class="product-card" data-id="${product.id}">
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
+                <img src="${product.image}" alt="${product.name} - VybeCulture Oversize" loading="lazy">
                 <div class="product-overlay">
                     <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
                 </div>
@@ -132,61 +143,17 @@ function toggleCart() {
 }
 
 function checkout() {
-    if (cart.length === 0) {
-        alert('Your cart is empty!');
+    window.location.href = 'checkout.html';
+}
+
+function goToCheckout() {
+    const user = localStorage.getItem('currentUser');
+    if (!user) {
+        alert('Please login to checkout!');
+        window.location.href = 'signup.html?redirect=checkout';
         return;
     }
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const orderId = 'VYB-' + Date.now().toString().slice(-8);
-    const orderDate = new Date().toLocaleDateString('en-IN');
-    
-    const user = localStorage.getItem('currentUser');
-    let userData = null;
-    if (user) {
-        userData = JSON.parse(user);
-    }
-    
-    const order = {
-        orderId: orderId,
-        date: orderDate,
-        userId: userData ? userData.id : null,
-        userName: userData ? userData.name : 'Guest',
-        userEmail: userData ? userData.email : '',
-        userPhone: userData ? userData.phone : '',
-        userAddress: userData ? userData.address : '',
-        items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity, size: item.selectedSize })),
-        total: total,
-        status: 'Pending'
-    };
-    
-    let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    orders.push(order);
-    localStorage.setItem('orders', JSON.stringify(orders));
-    
-    let itemList = '';
-    cart.forEach(item => {
-        itemList += `%0A• ${item.name} x${item.quantity} (Size: ${item.selectedSize}) - ₹${item.price * item.quantity}`;
-    });
-    
-    let customerInfo = '';
-    if (userData) {
-        customerInfo = `%0A%0A*Customer Details:*%0AName: ${userData.name}%0APhone: ${userData.phone || 'N/A'}%0AAddress: ${userData.address || 'N/A'}`;
-    }
-    
-    const whatsAppMsg = `*New Order - VybeCulture*%0A%0A*Order ID:* ${orderId}%0A*Date:* ${orderDate}%0A*Items:*${itemList}%0A%0A*Total:* ₹${total}${customerInfo}`;
-    const adminPhone = '917982504396';
-    
-    alert(`Order Placed! ✅\n\nOrder ID: ${orderId}\nTotal: ₹${total}\n\nYou will receive updates on WhatsApp.`);
-    
-    window.open(`https://wa.me/${adminPhone}?text=${whatsAppMsg}`, '_blank');
-    
-    const cartCount = document.querySelector('.cart-count');
-    if (cartCount) cartCount.textContent = '0';
-    
-    localStorage.removeItem('cart');
-    cart = [];
-    updateCartUI();
+    window.location.href = 'checkout.html';
 }
 
 function getProductsByCategory(category) {
@@ -207,29 +174,6 @@ function filterProducts(category) {
     window.location.href = category === 'all' ? 'products.html' : `products.html?category=${category}`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderMenProducts();
-    renderWomenProducts();
-    updateCartUI();
-    updateUserIcon();
-    
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-    }
-});
-
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (header) {
-        header.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.1)' : '0 2px 10px rgba(0,0,0,0.05)';
-    }
-});
-
-// User Authentication
 function handleUserClick() {
     const user = localStorage.getItem('currentUser');
     if (user) {
@@ -296,3 +240,26 @@ function searchProducts(e) {
         </div>
     `).join('');
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderMenProducts();
+    renderWomenProducts();
+    renderFidgetProducts();
+    updateCartUI();
+    updateUserIcon();
+    
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    }
+});
+
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (header) {
+        header.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.1)' : '0 2px 10px rgba(0,0,0,0.05)';
+    }
+});

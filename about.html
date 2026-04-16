@@ -9,14 +9,232 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #333; }
+        
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 5% 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .about-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .about-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .about-image {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .stats-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 5%;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item p {
+            opacity: 0.8;
+        }
+        
+        .products-section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .products-section h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .product-card i {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+        
+        .product-card h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .cta-section {
+            background: #f5f5f5;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        
+        .team-section {
+            padding: 4rem 5%;
+            background: white;
+        }
+        
+        .team-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .team-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .member-image {
+            margin-bottom: 1rem;
+        }
+        
+        .team-member h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .team-member .role {
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member .desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content, .stats-grid, .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-hero {
+                padding: 80px 5% 60px;
+            }
+            
+            .about-hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                    <img src="logo.png" alt="VybeCulture" style="height:40px; vertical-align:middle;">
-                    <span style="margin-left:10px;">VybeCulture</span>
-                </div>
+                <img src="logo.png" alt="VybeCulture" style="height:35px;">
+                <span>VybeCulture</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Shop</a></li>
@@ -24,63 +242,111 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <button class="search-btn" onclick="toggleSearch()">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="cart-btn" onclick="toggleCart()">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">0</span>
-                </button>
+                <button onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                <button id="userBtn" onclick="handleUserClick()"><i class="fas fa-user"></i></button>
+                <button onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></button>
             </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
     </header>
-
+    
     <section class="about-hero">
         <h1>About VybeCulture</h1>
-        <p>Crafting style since 2020</p>
+        <p>Premium Oversize Fashion & Lifestyle</p>
     </section>
-
+    
     <section class="about-content">
         <div class="about-image">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800" alt="About VybeCulture">
+            <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800" alt="VybeCulture Store">
         </div>
         <div class="about-text">
-            <h2>Our Story</h2>
-            <p>VybeCulture was founded with a simple vision: to create premium fashion that resonates with the modern individual's unique sense of style. We believe that clothing is more than just fabric - it's an expression of personality, confidence, and self-identity.</p>
-            <p>Our collections are thoughtfully designed with attention to quality, comfort, and timeless aesthetics. Each piece is crafted using premium materials to ensure durability and elegance that lasts beyond seasons.</p>
-            <p>At VybeCulture, we are committed to sustainable practices and ethical manufacturing. We strive to minimize our environmental impact while delivering exceptional value to our customers.</p>
+            <h2>Who We Are</h2>
+            <p>VybeCulture is a premier fashion brand dedicated to delivering premium oversize clothing and trendy lifestyle products. Based in Delhi, we serve fashion-forward individuals across India who value comfort, style, and quality.</p>
+            <p>Our collection features premium oversize t-shirts designed for the modern youth.</p>
+            <p>At VybeCulture, we believe in providing exceptional value without compromising on quality.</p>
         </div>
     </section>
-
-    <section class="about-values">
-        <h2>Our Values</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <i class="fas fa-gem"></i>
-                <h3>Quality</h3>
-                <p>We use only the finest materials and craftsmanship in every piece we create.</p>
-            </div>
-            <div class="value-card">
-                <i class="fas fa-leaf"></i>
-                <h3>Sustainability</h3>
-                <p>Committed to eco-friendly practices and responsible fashion.</p>
-            </div>
-            <div class="value-card">
-                <i class="fas fa-heart"></i>
-                <h3>Customer First</h3>
-                <p>Your satisfaction is our priority. We listen and evolve with your needs.</p>
+    
+    <section class="team-section">
+        <div class="team-content">
+            <h2>Meet Our Founders</h2>
+            <p class="team-subtitle">The visionaries behind VybeCulture</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="Harsh.png" alt="Harsh - Founder" style="width:150px;height:150px;border-radius:50%;object-fit:cover;">
+                    </div>
+                    <h3>Harsh</h3>
+                    <p class="role">Founder</p>
+                    <p class="desc">Visionary leader driving brand strategy and growth</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="Sandipan.png" alt="Sandipan - Co-Founder" style="width:150px;height:150px;border-radius:50%;object-fit:cover;">
+                    </div>
+                    <h3>Sandipan</h3>
+                    <p class="role">Co-Founder</p>
+                    <p class="desc">Tech & Operations head managing day-to-day activities</p>
+                </div>
             </div>
         </div>
     </section>
-
+    
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>10K+</h3>
+                <p>Happy Customers</p>
+            </div>
+            <div class="stat-item">
+                <h3>50+</h3>
+                <p>Products</p>
+            </div>
+            <div class="stat-item">
+                <h3>30+</h3>
+                <p>Cities Served</p>
+            </div>
+            <div class="stat-item">
+                <h3>4.8★</h3>
+                <p>Rating</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="products-section">
+        <h2>What We Offer</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <i class="fas fa-tshirt"></i>
+                <h3>Oversize T-Shirts</h3>
+                <p>Premium quality oversize t-shirts in trendy designs. Comfortable fit for everyday wear.</p>
+            </div>
+            <div class="product-card">
+                <i class="fas fa-spinner"></i>
+                <h3>Fidget Toys</h3>
+                <p>Stress relief and fun fidget toys for kids and adults. Quality materials, smooth operation.</p>
+            </div>
+            <div class="product-card">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Fast Shipping</h3>
+                <p>Free shipping on orders above ₹999. Quick delivery across India with tracking.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <h2>Join the VybeCulture Family</h2>
+        <p>Experience premium fashion and excellent customer service.</p>
+        <a href="products.html" class="cta-btn">Shop Now</a>
+    </section>
+    
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>VybeCulture</h3>
-                <p>Premium fashion for the modern individual.</p>
+                <p>Premium oversize fashion and lifestyle products.</p>
                 <div class="social-links">
                     <a href="https://instagram.com/vybeculture_society" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.linkedin.com/company/vybeculture/" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -99,10 +365,10 @@
             <div class="footer-section">
                 <h3>Customer Care</h3>
                 <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Shipping Policy</li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping.html">Shipping Policy</a></li>
+                    <li><a href="returns.html">Returns</a></li>
+                    <li><a href="sizeguide.html">Size Guide</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -117,35 +383,11 @@
         </div>
     </footer>
 
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <button class="close-cart" onclick="toggleCart()">&times;</button>
-        </div>
-        <div class="cart-items" id="cart-items">
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total">₹0</span>
-            </div>
-            <button class="checkout-btn" onclick="checkout()">Checkout</button>
-        </div>
-    </div>
-    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-
-    <div class="search-modal" id="searchModal">
-        <div class="search-box">
-            <button class="close-search" onclick="toggleSearch()">&times;</button>
-            <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts(event)">
-            <div class="search-results" id="searchResults"></div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             updateCartUI();
+            updateUserIcon();
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             if (hamburger && navLinks) {

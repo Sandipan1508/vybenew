@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns & Refund Policy - VybeCulture</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #333; }
+        
+        .policy-container {
+            max-width: 800px;
+            margin: 80px auto 2rem;
+            padding: 2rem;
+        }
+        
+        .policy-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .policy-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .policy-section {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .policy-section h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        
+        .policy-section p, .policy-section ul {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .policy-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .policy-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: #f0f8ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #1a1a1a;
+        }
+        
+        .contact-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .contact-link a {
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.png" alt="VybeCulture" style="height:35px;">
+                <span>VybeCulture</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                <button id="userBtn" onclick="handleUserClick()"><i class="fas fa-user"></i></button>
+                <button onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></button>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="policy-container">
+        <div class="policy-header">
+            <h1>Returns & Refund Policy</h1>
+            <p>Our return and refund guidelines</p>
+        </div>
+        
+        <div class="highlight-box">
+            <strong>Return Window:</strong> 30 days from delivery date<br>
+            <strong>Refund Timeline:</strong> 5-7 business days after return approved
+        </div>
+        
+        <div class="policy-section">
+            <h2>Eligible Items for Return</h2>
+            <ul>
+                <li>Unused items with original tags attached</li>
+                <li>Items in original packaging</li>
+                <li>Wrong size received (provided you ordered correctly)</li>
+                <li>Defective or damaged products</li>
+                <li>Wrong product delivered</li>
+            </ul>
+        </div>
+        
+        <div class="policy-section">
+            <h2>Items Not Eligible for Return</h2>
+            <ul>
+                <li>Used or washed items</li>
+                <li>Items without original tags</li>
+                <li>Innerwear, socks, and accessories</li>
+                <li>Items damaged due to customer misuse</li>
+                <li>Customized or altered products</li>
+                <li>Sale items (unless defective)</li>
+            </ul>
+        </div>
+        
+        <div class="policy-section">
+            <h2>How to Request a Return</h2>
+            <ul>
+                <li>Contact us via email or phone with your Order ID</li>
+                <li>Provide photos of the item (if defective)</li>
+                <li>Wait for return approval confirmation (within 24-48 hours)</li>
+                <li>Pack the item securely with all tags</li>
+                <li>Ship the item back using our provided label or courier</li>
+            </ul>
+        </div>
+        
+        <div class="policy-section">
+            <h2>Refund Process</h2>
+            <ul>
+                <li>Once we receive and inspect your return (3-5 business days)</li>
+                <li>Refund approved → Amount credited within 5-7 business days</li>
+                <li>Refund via original payment method</li>
+                <li>You will receive email/SMS confirmation at each step</li>
+            </ul>
+        </div>
+        
+        <div class="policy-section">
+            <h2>Exchange Policy</h2>
+            <p>We offer size exchanges for the same product. Simply return the current size and place a new order for the desired size. Color exchanges are not available.</p>
+        </div>
+        
+        <div class="policy-section">
+            <h2>Return Shipping</h2>
+            <ul>
+                <li><strong>Defective/Wrong Product:</strong> Free return shipping (we'll arrange pickup)</li>
+                <li><strong>Size Change/Other:</strong> Customer bears shipping cost (₹99 deduction)</li>
+            </ul>
+        </div>
+        
+        <div class="policy-section">
+            <h2>Refund Options</h2>
+            <ul>
+                <li><strong>Original Payment Method:</strong> Credit/Debit card, UPI, Net Banking</li>
+                <li><strong>Store Credit:</strong> 10% extra credit for future purchase (optional)</li>
+            </ul>
+        </div>
+        
+        <div class="policy-section">
+            <h2>Contact for Returns</h2>
+            <p>Email: vybeculture2026@gmail.com<br>
+            Phone: +91 7982504396<br>
+            (Mon-Sat, 9AM-8PM)</p>
+        </div>
+        
+        <div class="contact-link">
+            <p>Need help? <a href="contact.html">Contact Us</a> | <a href="faq.html">View FAQ</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            updateUserIcon();
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

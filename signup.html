@@ -163,7 +163,6 @@
                     <p id="otpTimer" style="text-align:center;color:#666;font-size:0.9rem;"></p>
                 </div>
                 <input type="password" id="signupPassword" placeholder="Password" required>
-                <input type="text" id="signupAddress" placeholder="Delivery Address">
                 <button type="submit" id="signupBtn">Send OTP</button>
             </form>
             
@@ -275,7 +274,16 @@
                 sessionStorage.removeItem('signupData');
                 
                 alert('Account verified successfully!');
-                window.location.href = 'index.html';
+                
+                // Check for redirect
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirect = urlParams.get('redirect');
+                
+                if (redirect === 'checkout') {
+                    window.location.href = 'index.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
             } else {
                 document.getElementById('signupError').textContent = 'Invalid OTP. Please try again.';
                 document.getElementById('signupError').style.display = 'block';

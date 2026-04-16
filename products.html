@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - VybeCulture</title>
+    <title>Shop - Men's & Women's Oversize Collection | VybeCulture</title>
+    <meta name="description" content="Shop VybeCulture's premium oversize t-shirts and fashion wear. Browse men's and women's collections at ₹649. Free shipping above ₹999.">
+    <meta name="keywords" content="buy oversize t-shirts, mens clothing, womens fashion, shop online, Delhi">
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,9 +17,9 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                    <img src="logo.png" alt="VybeCulture" style="height:40px; vertical-align:middle;">
-                    <span style="margin-left:10px;">VybeCulture</span>
-                </div>
+                <img src="logo.png" alt="VybeCulture" style="height:35px;">
+                <span>VybeCulture</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html" class="active">Shop</a></li>
@@ -24,13 +27,9 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <button class="search-btn" onclick="toggleSearch()">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="cart-btn" onclick="toggleCart()">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">0</span>
-                </button>
+                <button onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                <button id="userBtn" onclick="handleUserClick()"><i class="fas fa-user"></i></button>
+                <button onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></button>
             </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -49,9 +48,9 @@
             <div class="filter-group">
                 <h4>Category</h4>
                 <ul>
-                    <li><a href="#" onclick="filterProducts('all')" class="active">All Products</a></li>
                     <li><a href="#" onclick="filterProducts('men')">Men's Collection</a></li>
                     <li><a href="#" onclick="filterProducts('women')">Women's Collection</a></li>
+                    <li><a href="#" onclick="filterProducts('fidget')">Fidget Toys</a></li>
                 </ul>
             </div>
         </div>

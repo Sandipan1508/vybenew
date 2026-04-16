@@ -48,38 +48,112 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--white);
+    background: #fff;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: 0.6rem 5%;
     max-width: 1400px;
     margin: 0 auto;
 }
 
 .logo {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo img {
+    height: 32px;
+}
+
+.logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
     font-weight: 700;
+    color: #1a1a1a;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #000;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.nav-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    padding: 0.3rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 55px;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo img {
+    height: 30px;
+    width: auto;
+}
+
+.logo span {
+    font-size: 1.1rem;
+}
     letter-spacing: 2px;
     color: var(--primary);
 }
 
 .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 1.5rem;
 }
 
 .nav-links a {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     transition: color 0.3s;
     position: relative;
 }
@@ -110,8 +184,8 @@ header {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0.5rem;
+    font-size: 1rem;
+    padding: 0.3rem;
     transition: color 0.3s;
     position: relative;
 }
@@ -146,13 +220,13 @@ header {
 
 .cart-count {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -5px;
+    right: -5px;
     background: var(--primary);
     color: var(--white);
-    font-size: 0.7rem;
-    width: 18px;
-    height: 18px;
+    font-size: 0.6rem;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -819,35 +893,113 @@ footer {
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .shop-content {
+        flex-direction: column;
+    }
+    
+    .filters {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+    
+    .logo img {
+        height: 30px !important;
+    }
+    
+    .logo span {
+        font-size: 1rem;
+    }
+    
     .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         display: none;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links li {
+        padding: 0.5rem 0;
     }
     
     .hamburger {
         display: block;
     }
     
+    .hero {
+        height: 70vh;
+        margin-top: 60px;
+    }
+    
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .categories h2,
+    .featured h2 {
+        font-size: 1.5rem;
     }
     
     .category-grid {
         grid-template-columns: 1fr;
     }
     
+    .category-card {
+        height: 300px;
+    }
+    
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .product-image {
+        height: 200px;
+    }
+    
+    .product-info h3 {
+        font-size: 0.8rem;
+    }
+    
+    .product-info .price {
+        font-size: 0.9rem;
     }
     
     .features {
         grid-template-columns: 1fr;
+        padding: 2rem 5%;
+    }
+    
+    .feature-box {
+        padding: 1rem;
     }
     
     .footer-content {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
     
     .newsletter-form {
@@ -858,6 +1010,53 @@ footer {
         width: 100%;
         right: -100%;
     }
+    
+    .page-header {
+        margin-top: 60px;
+        padding: 2rem 5%;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-section {
+        grid-template-columns: 1fr;
+        margin-top: 60px;
+        padding: 2rem 5%;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        padding: 2rem 5%;
+    }
+    
+    .about-image {
+        height: 300px;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-modal {
+        top: 60px;
+        width: 95%;
+        padding: 0 0.5rem;
+    }
+    
+    .auth-box {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .auth-box h1 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -866,7 +1065,56 @@ footer {
     }
     
     .product-image {
-        height: 350px;
+        height: 250px;
+    }
+    
+    .view-all {
+        margin-top: 1rem;
+    }
+    
+    .btn-secondary {
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+    }
+    
+    .cart-item img {
+        width: 100%;
+        height: 150px;
+    }
+    
+    .cart-item-quantity {
+        justify-content: center;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .profile-card {
+        padding: 1rem;
+    }
+    
+    .order-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .orders-table {
+        overflow-x: auto;
+    }
+    
+    table {
+        font-size: 0.8rem;
+    }
+    
+    th, td {
+        padding: 0.5rem;
     }
 }
 

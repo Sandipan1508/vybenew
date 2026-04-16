@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
+<header>
         <nav class="navbar">
             <div class="logo">
-                    <img src="logo.png" alt="VybeCulture" style="height:40px; vertical-align:middle;">
-                    <span style="margin-left:10px;">VybeCulture</span>
-                </div>
+                <img src="logo.png" alt="VybeCulture" style="height:35px;">
+                <span>VybeCulture</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Shop</a></li>
@@ -24,13 +24,9 @@
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <button class="search-btn" onclick="toggleSearch()">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="cart-btn" onclick="toggleCart()">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">0</span>
-                </button>
+                <button onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                <button id="userBtn" onclick="handleUserClick()"><i class="fas fa-user"></i></button>
+                <button onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></button>
             </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
